@@ -87,6 +87,21 @@ app.post('/users', (req, res) => {
 
 });
 
+// Iteration 9 - Get all users
+app.get('/users', (req, res) =>{
+    User.find().then(allUsers => {
+        res.status(200).json(allUsers);
+    }).catch(error => res.status(500).json(error));
+});
+
+// Iteration 10 - Get user by Id
+app.get('/users/:id', (req,res) => {
+    const {id} = req.params;
+    User.findById(id).then(foundUser => {
+        res.status(200).json(foundUser);
+    }).catch(error => res.status(500).json(error));
+});
+
 
 
 
