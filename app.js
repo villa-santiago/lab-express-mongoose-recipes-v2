@@ -2,6 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const Recipe = require("./models/Recipe.model");
+const User = require("./models/User.model");
 
 const app = express();
 
@@ -76,6 +77,16 @@ app.delete('/recipes/:id', (req, res) => {
         res.status(204).json({message: `post ${id} has been deleted`});
     }).catch(error => res.status(500).json(error))
 });
+
+// Iteration 8 - User
+app.post('/users', (req, res) => {
+    const {email, firstName, lastName, password, image} = req.body;
+    User.create({email, firstName, lastName, password, image}).then(newUser => {
+        res.status(201).json(newUser);
+    }).catch(error => res.status(500).json(error));
+
+});
+
 
 
 
